@@ -203,7 +203,11 @@ std::string get_full_program_path()
     }
 
     std::string program_path{};
+#ifdef __LINUX__
     program_path = get_full_lib_path();
+#else
+    program_path = "\\\\?\\" + get_full_lib_path();
+#endif
     return program_path.substr(0, program_path.rfind(PATH_SEPARATOR)).append(PATH_SEPARATOR);
 }
 
